@@ -53,6 +53,21 @@
 
 ---
 
+## 2026-06-11 — Claude Fable 5 (Clodi) — ARCADE CAROUSEL SHIPPED
+
+**Phase:** Games / Arcade Station redesign — COMPLETE
+**Completed:**
+- Spec + plan: `docs/superpowers/specs/2026-06-11-arcade-carousel-design.md`, `docs/superpowers/plans/2026-06-11-arcade-carousel.md`
+- 6-cabinet 3D spotlight carousel (CSS 3D + GSAP), zoom-into-screen launch, reusable `CartridgeLoader` (use it for level transitions: `withCoin: false, duration: ~1.2`), game registry (`src/games/registry.ts` — add new games there)
+- New games roster: Pac-Toe (ready), Stranger Pac-Man, Galactic Speedway, Legend of the Mushroom Kingdom, Barista, Octo-Catcher (Coming Soon)
+- Playwright-verified at 1280/768/375px; 2 interaction bugs found+fixed (swipe trailing-click, keyboard observer); Brutal Critic FAIL→fixed (opacity ownership, tween cleanup, registry guard, reduced-motion loader)
+
+**Next step:** Build the games — each new game = component + registry entry + `ready: true`. Then TV videos + Spanish→English TV synopses.
+**Issues:** None — lint clean, deployed
+**Files changed:** Arcade.tsx (rewired), ArcadeCarousel.tsx, GameShell.tsx, CartridgeLoader.tsx (new), registry.ts (new), data.ts, styles.css
+
+---
+
 ## HOW TO RESUME (for the next model)
 
 1. Read `/Code-ai/conductor.md` — your PM identity and process
