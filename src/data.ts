@@ -35,6 +35,30 @@ export const GAMES: GameInfo[] = [
     ready: true,
   },
   {
+    id: 'stranger-pac',
+    title: 'Stranger Pac-Man',
+    description:
+      'Guide Eleven through the Upside Down maze. Demogorgons hunt in the dark — waffles restore your power.',
+    icon: '🧇',
+    ready: false,
+  },
+  {
+    id: 'space-race',
+    title: 'Galactic Speedway',
+    description:
+      'Race starfighters through asteroid fields in a galaxy far, far away. Six sectors, rising speed.',
+    icon: '🚀',
+    ready: false,
+  },
+  {
+    id: 'zelda-mario',
+    title: 'Legend of the Mushroom Kingdom',
+    description:
+      "A hero's quest through warp pipes and dungeons. Collect rupee-coins, find the master flower.",
+    icon: '🗡️',
+    ready: false,
+  },
+  {
     id: 'barista',
     title: 'Starbucks Retro Barista',
     description:
@@ -48,14 +72,6 @@ export const GAMES: GameInfo[] = [
     description:
       'Manage a Git branch to catch commits and avoid merge conflicts.',
     icon: '🐙',
-    ready: false,
-  },
-  {
-    id: 'commit-quest',
-    title: 'Git Commit Quest',
-    description:
-      'Complete the real Git sequence to stage, commit, and push repository changes.',
-    icon: '💻',
     ready: false,
   },
 ];
