@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "retro-arcade-portfolio"
+  },
+  "targets": {
+    "retro-arcade-portfolio": {
+      "hosting": {
+        "claude-portfolio": [
+          "sandy-sysdev-v2"
+        ]
+      }
+    }
+  }
+}
