@@ -15,6 +15,7 @@ export default function ArcadeCarousel({ paused, onLaunch }: ArcadeCarouselProps
   const stageRef = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(0);
   const dragX = useRef<number | null>(null);
+  const didDrag = useRef(false);
 
   const focus = (i: number) => {
     const next = Math.max(0, Math.min(GAMES.length - 1, i));
@@ -63,17 +64,24 @@ export default function ArcadeCarousel({ paused, onLaunch }: ArcadeCarouselProps
     let inView = false;
     const io = new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.3 });
     io.observe(stage);
+    const step = (dir: number) => {
+      setFocused((f) => {
+        const next = Math.max(0, Math.min(GAMES.length - 1, f + dir));
+        if (next !== f) sfx.hover();
+        return next;
+      });
+    };
     const onKey = (e: KeyboardEvent) => {
       if (!inView) return;
-      if (e.key === 'ArrowLeft') focus(focused - 1);
-      if (e.key === 'ArrowRight') focus(focused + 1);
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
     };
     window.addEventListener('keydown', onKey);
     return () => {
       io.disconnect();
       window.removeEventListener('keydown', onKey);
     };
-  }, [focused, paused]);
+  }, [paused]);
 
   const shake = (el: HTMLElement) => {
     sfx.locked();
@@ -81,6 +89,10 @@ export default function ArcadeCarousel({ paused, onLaunch }: ArcadeCarouselProps
   };
 
   const onCabClick = (i: number, el: HTMLElement) => {
+    if (didDrag.current) {
+      didDrag.current = false;
+      return;
+    }
     if (i !== focused) {
       focus(i);
       return;
@@ -110,13 +122,17 @@ export default function ArcadeCarousel({ paused, onLaunch }: ArcadeCarouselProps
       <div
         className="carousel__stage"
         ref={stageRef}
-        onPointerDown={(e) => { dragX.current = e.clientX; }}
+        onPointerDown={(e) => { didDrag.current = false; dragX.current = e.clientX; }}
         onPointerUp={(e) => {
           if (dragX.current === null) return;
           const dx = e.clientX - dragX.current;
           dragX.current = null;
-          if (dx < -40) focus(focused + 1);
-          else if (dx > 40) focus(focused - 1);
+          if (Math.abs(dx) > 40) {
+            didDrag.current = true;
+            focus(dx < 0 ? focused + 1 : focused - 1);
+          } else {
+            didDrag.current = false;
+          }
         }}
       >
         {GAMES.map((g, i) => (
