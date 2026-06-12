@@ -62,7 +62,7 @@
 - New games roster: Pac-Toe (ready), Stranger Pac-Man, Galactic Speedway, Legend of the Mushroom Kingdom, Barista, Octo-Catcher (Coming Soon)
 - Playwright-verified at 1280/768/375px; 2 interaction bugs found+fixed (swipe trailing-click, keyboard observer); Brutal Critic FAIL→fixed (opacity ownership, tween cleanup, registry guard, reduced-motion loader)
 
-**Next step:** Build the games — each new game = component + registry entry + `ready: true`. Then TV videos + Spanish→English TV synopses.
+**Next step (NEXT SESSION — Sandy's directive):** Build TWO games, created DIRECTLY by the main model (NO subagents — Sandy wants creative freedom over token efficiency; she splits work into sessions on purpose). Proposed pair (confirm with Sandy at session start): (1) Pac-Toe redesign from the ground up — 3x3/5x5/7x7 modes × 6 levels each, (2) Stranger Pac-Man. Aim for WOW — juice, feel, surprises. Each game = component + `src/games/registry.ts` entry + `ready: true` in data.ts; use `CartridgeLoader` (`withCoin:false, duration:~1.2`) for level transitions. Backlog: carousel "more wow" polish pass, TV videos, Spanish→English TV synopses.
 **Issues:** None — lint clean, deployed
 **Files changed:** Arcade.tsx (rewired), ArcadeCarousel.tsx, GameShell.tsx, CartridgeLoader.tsx (new), registry.ts (new), data.ts, styles.css
 
