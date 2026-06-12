@@ -519,12 +519,127 @@ a {
   color: var(--gold);
   letter-spacing: 2px;
 }
-.arcade__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 36px;
+/* ---------- spotlight carousel ---------- */
+
+.carousel {
+  position: relative;
   max-width: 1300px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.carousel__stage {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  perspective: 1200px;
+  touch-action: pan-y;
+  user-select: none;
+}
+.carousel__stage .cab {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: min(300px, 78vw);
+  margin-left: calc(min(300px, 78vw) / -2);
+  will-change: transform;
+}
+.carousel__stage .cab:hover {
+  transform: none; /* GSAP owns transforms; disable the grid-era hover lift */
+}
+.cab--focused {
+  border-color: var(--gold);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55), 0 0 38px rgba(247, 201, 72, 0.25);
+}
+.cab--focused .cab__marquee {
+  animation: marqueeGlow 1.6s ease-in-out infinite;
+}
+@keyframes marqueeGlow {
+  50% {
+    box-shadow: 0 0 18px rgba(247, 201, 72, 0.6);
+  }
+}
+.carousel__arrow {
+  position: absolute;
+  top: 215px;
+  z-index: 30;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  background: rgba(11, 15, 46, 0.85);
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.carousel__arrow:hover:not(:disabled) {
+  transform: scale(1.15);
+}
+.carousel__arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.carousel__arrow--left { left: 2px; }
+.carousel__arrow--right { right: 2px; }
+.carousel__start {
+  margin-top: 16px;
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 16px 34px;
+  border-radius: 12px;
+  border: 3px solid var(--navy);
+  background: var(--gold);
+  color: var(--navy);
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.carousel__start:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 rgba(0, 0, 0, 0.45);
+}
+.carousel__start:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45);
+}
+.carousel__dots {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.carousel__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px; /* pixel-square dots, it's the '80s */
+  border: 2px solid var(--gold);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.carousel__dot--on {
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(247, 201, 72, 0.8);
+}
+
+/* gameshell zoom panel */
+.gameshell__zoom {
+  position: fixed;
+  z-index: 450;
+  background: radial-gradient(circle at 50% 35%, #1d2766 0%, var(--ink) 75%);
+  border-radius: 12px;
+  opacity: 0;
+}
+
+@media (max-width: 900px) {
+  .carousel__stage {
+    height: 460px;
+  }
+  .carousel__arrow {
+    display: none; /* swipe + dots on small screens */
+  }
 }
 
 /* CSS arcade cabinet */
