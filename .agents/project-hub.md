@@ -59,12 +59,14 @@ All profile data lives in `src/data.ts`. Agents must NOT hardcode content — re
 | Content changes (logo, text, titles) | 🟢 Approved | Clodi |
 | Git / GitHub / Firebase deploy | 🟢 Approved | Clodi |
 | Arcade station redesign (6 slots) | 🟢 Approved | Clodi |
-| Pac-Toe redesign (3x3/5x5/7x7 + 6 levels) | ⚪ Not started | — |
-| Zelda in Mario World | ⚪ Not started | — |
+| Spherical gallery entrance (Phantom-style) | 🟡 Under review | Clodi |
+| TV synopses Spanish → English | 🟢 Done | Clodi |
+| Pac-Toe redesign (3x3/5x5/7x7 + 6 levels) | 🟡 Under review (shipped, awaiting Sandy + BC pass) | Clodi |
+| Zelda in Mario World | 🟡 Under review (shipped, awaiting Sandy playtest) | Clodi |
 | Space Race (Star Wars) | ⚪ Not started | — |
 | Stranger Things Pac-Man | ⚪ Not started | — |
 | Videos inside TV Studio | ⚪ Not started | — |
-| Responsiveness audit (mobile/tablet) | ⚪ Not started | — |
+| Responsiveness audit (mobile/tablet) | 🟡 Under review (375/768 scans clean) | Clodi |
 
 ## Quality Rules (non-negotiable)
 

@@ -74,4 +74,23 @@ export const sfx = {
     tone(784, 0.1, 'square', 0.04, 0.1);
     tone(1047, 0.25, 'square', 0.04, 0.2);
   },
+  waka: () => {
+    tone(440, 0.06, 'triangle', 0.05, 0, 330);
+    tone(330, 0.06, 'triangle', 0.05, 0.07, 440);
+  },
+  laugh: () => {
+    [420, 470, 380, 430, 320, 250].forEach((f, i) => tone(f, 0.09, 'sawtooth', 0.03, i * 0.09, f * 0.85));
+  },
+  fanfare: () => {
+    [523, 659, 784, 1047, 784, 1319].forEach((f, i) => tone(f, i === 5 ? 0.4 : 0.13, 'square', 0.04, i * 0.13));
+  },
+  slash: () => tone(620, 0.09, 'sawtooth', 0.035, 0, 180),
+  hurt: () => {
+    tone(120, 0.12, 'square', 0.05);
+    tone(85, 0.18, 'square', 0.05, 0.08);
+  },
+  key: () => {
+    [784, 988, 1319].forEach((f, i) => tone(f, 0.11, 'triangle', 0.05, i * 0.09));
+  },
+  pipe: () => tone(640, 0.45, 'triangle', 0.06, 0, 140),
 };

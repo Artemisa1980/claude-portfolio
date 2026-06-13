@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import ArcadeCarousel from './ArcadeCarousel';
+import SphereGallery from './SphereGallery';
 import GameShell from './GameShell';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,18 +15,19 @@ export default function Arcade() {
   const rootRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<ActiveGame | null>(null);
 
-  // carousel rises from below as you scroll in
+  // sphere portal rises from below as you scroll in
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '.carousel',
-        { y: 90, opacity: 0 },
+        '.sphere',
+        { y: 90, opacity: 0, scale: 0.94 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          scale: 1,
+          duration: 0.9,
           ease: 'power3.out',
-          scrollTrigger: { trigger: '.carousel', start: 'top 80%' },
+          scrollTrigger: { trigger: '.sphere', start: 'top 80%' },
         }
       );
     }, rootRef);
@@ -42,10 +43,10 @@ export default function Arcade() {
         <h2 className="section-title" style={{ color: 'var(--cream)' }}>
           SANDY'S <span style={{ color: 'var(--mint)' }}>DEV-STATION</span>
         </h2>
-        <p className="arcade__sub">CLASSIC '80s ARCADE CABINETS • 6 CARTRIDGE SLOTS • INSERT COIN</p>
+        <p className="arcade__sub">SPHERICAL GAME VAULT • 6 CARTRIDGE SLOTS • DRAG TO EXPLORE • INSERT COIN</p>
       </div>
 
-      <ArcadeCarousel
+      <SphereGallery
         paused={active !== null}
         onLaunch={(id, screenEl) => setActive({ id, screenEl })}
       />

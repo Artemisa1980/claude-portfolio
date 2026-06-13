@@ -30,7 +30,7 @@ export const GAMES: GameInfo[] = [
     id: 'pac-toe',
     title: 'Pac-Toe: Neon Arcade',
     description:
-      'Chomp 3 Pac-dots in a row to defeat the ghosts. Classic strategy, neon rules. Press START to play!',
+      'Three sectors (3×3, 5×5, 7×7), six levels each — outline Ghosty, capture ghost coins, customize your Pac. Press START!',
     icon: '🕹️',
     ready: true,
   },
@@ -54,9 +54,9 @@ export const GAMES: GameInfo[] = [
     id: 'zelda-mario',
     title: 'Legend of the Mushroom Kingdom',
     description:
-      "A hero's quest through warp pipes and dungeons. Collect rupee-coins, find the master flower.",
+      "A hero's quest across 6 living worlds: slash goombas, loot ?-blocks, grab the key and warp-pipe onward. The Shell Dragon awaits!",
     icon: '🗡️',
-    ready: false,
+    ready: true,
   },
   {
     id: 'barista',
@@ -190,39 +190,39 @@ export interface TVChannel {
 export const TV_CHANNELS: TVChannel[] = [
   {
     id: 1,
-    title: 'Detrás de Cámaras: Mi Primer Portafolio',
+    title: 'Behind the Scenes: My First Portfolio',
     genre: 'Creative Vlog / Humour',
     length: '2:45 min',
     icon: '💻',
     synopsis:
-      'Un vlog divertido y honesto sobre las trasnochadas aprendiendo React, peleando con corchetes de TypeScript y celebrando cuando la página compila. ¡Cero placeholders, pura realidad!',
+      'A fun, honest vlog about late nights learning React, wrestling TypeScript brackets, and celebrating when the page finally compiles. Zero placeholders, pure reality!',
   },
   {
     id: 2,
-    title: 'La Ciencia del Capuccino Perfecto',
+    title: 'The Science of the Perfect Cappuccino',
     genre: 'Coffee Mastery',
     length: '3:15 min',
     icon: '☕️',
     synopsis:
-      'Once años de espuma de leche resumidos en tres minutos: temperatura, textura y el arte de dibujar corazones que sobreviven hasta la primera bebida.',
+      'Eleven years of milk foam distilled into three minutes: temperature, texture, and the art of pouring hearts that survive until the first sip.',
   },
   {
     id: 3,
-    title: 'Las Crónicas del Night Audit',
+    title: 'The Night Audit Chronicles',
     genre: 'Hospitality Comedy',
     length: '4:00 min',
     icon: '🏨',
     synopsis:
-      'Historias reales del turno de la noche en el Hilton: cuadrar cuentas a las 3 AM, huéspedes sonámbulos y el misterio eterno de la impresora del lobby.',
+      'True stories from the Hilton night shift: balancing the books at 3 AM, sleepwalking guests, and the eternal mystery of the lobby printer.',
   },
   {
     id: 4,
-    title: 'AI Prompting: Experimento Creativo',
+    title: 'AI Prompting: A Creative Experiment',
     genre: 'AI Exploration',
     length: '1:50 min',
     icon: '🧠',
     synopsis:
-      'Experimentos de prompt engineering: cómo convertir una idea en un sistema interactivo conversando con modelos de IA. Spoiler: la especificidad lo es todo.',
+      'Prompt-engineering experiments: turning an idea into an interactive system by conversing with AI models. Spoiler: specificity is everything.',
   },
 ];
 

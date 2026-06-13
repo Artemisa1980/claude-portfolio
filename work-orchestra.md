@@ -9,6 +9,8 @@
 
 ## When to Use This Workflow
 
+**Analyze the project first. If the process is too complex, initiate the work orchestration. Assign the agents witth the same rigor and core values that represent us.**
+
 Use the **Work Orchestra** when:
 - The project is too big or complex for one chat session (you'd run out of tokens)
 - The work can be divided into independent modules

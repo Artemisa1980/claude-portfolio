@@ -68,6 +68,109 @@
 
 ---
 
+## 2026-06-12 — Claude Fable 5 (Clodi) — SPHERE GALLERY SHIPPED
+
+**Phase:** Games / Arcade entrance redesign (Phantom.land-style) — COMPLETE
+**Completed:**
+- `SphereGallery.tsx` (new): inside-a-sphere Three.js gallery replacing the carousel in `#arcade`.
+  70 curved tiles (SphereGeometry patches, inward-facing), camera at center. Drag = damped
+  lenis-style look-around + inertia; tap = raycast → game launch via existing GameShell/CartridgeLoader;
+  locked games shake, fillers pop. Keyboard arrows + Enter supported. Idle auto-drift after 3s.
+- All card textures drawn programmatically (canvas → CanvasTexture, zero image assets):
+  6 game cartridges (SANDY-DEV brand, READY/COMING SOON badges) + 14 '80s filler designs
+  (RETRO-VAULT brand; pixelated-emoji sprites via nearest-neighbor upscale; starfield/synthwave-grid/
+  maze/stripe art variants). Textures shared across repeated tiles.
+- Games de-clustered across the sphere (placement formula); (row 2, col 0) forced Pac-Toe + initial camera aim.
+- Mobile: `touch-action: pan-y` (vertical swipe still scrolls page), short hint text, HUD trimmed ≤700px.
+- Responsive audit at 375/768: zero horizontal overflows site-wide (scripted scan + visual checks).
+- TV synopses + titles translated to English (data.ts) — language rule satisfied.
+- Added `src/vite-env.d.ts` (vite/client types for `import.meta.env`).
+- Verified in preview: tap-launch chain tile → zoom → loader → Pac-Toe playable; tsc clean; build OK.
+
+**Next step:** Sandy reviews sphere feel ("more wow" polish welcome); then build Pac-Toe redesign (3x3/5x5/7x7 × 6 levels) + Stranger Pac-Man in Solo Creator mode.
+**Issues:** `ArcadeCarousel.tsx` now unused (kept for reference; safe to delete). Dev-only `window.__sphere` debug hook is `import.meta.env.DEV`-gated. Brutal Critic pass on SphereGallery pending.
+**Files changed:** SphereGallery.tsx (new), Arcade.tsx, styles.css, data.ts, vite-env.d.ts (new), relay-log.md, .agents/project-hub.md
+
+---
+
+## 2026-06-12 — Claude Fable 5 (Clodi) — PAC-TOE REDESIGN SHIPPED
+
+**Phase:** Games — Pac-Toe ground-up redesign — COMPLETE (Solo Creator mode)
+**Completed:**
+- New `src/games/pactoe/` module (lazy-loaded, 6.2 kB gzip chunk):
+  - `ai.ts` — generic K-in-a-row engine (one engine for all sectors): win detection,
+    candidate pruning, heuristic placement scoring, negamax+alpha-beta. 6 levels:
+    ROOKIE→ARCADE GOD (lvl 6 has 7% mercy blunder so it stays beatable).
+  - `sprites.tsx` — Pac & Ghosty SVG components, 3 switchable styles (classic / neon glow /
+    8-bit pixel bitmaps), 6 brand colors, moods (idle/happy/ko), ghost pupils track last move.
+  - `PacToeGame.tsx` — 3 sectors: 3×3 (k=3), 5×5 (k=4), 7×7 (k=5); same dynamic at every size.
+    Sector tabs (switch anytime, per-sector progress), legend per sector, 6-level pips,
+    win→advance with CartridgeLoader transition (withCoin:false, 1.2s), champion screen at L6,
+    GHOST SERVES FIRST on even levels. Coins as war trophies: Pac win → +ghost coins (captures);
+    Ghost win → +pac coins (Ghosty's stash). Skin customizer (style+color buttons, ghost auto-contrast).
+    Juice: confetti burst, coin-fly to HUD, board shake on loss, win-line draw animation,
+    chomp/float character animations, waka/laugh/fanfare chiptune sfx (added to sound.ts).
+    Save persisted to localStorage (`pactoe-v2`): coins, skin, per-sector progress.
+- Old `components/PacToe.tsx` deleted; registry points to new module; cartridge description updated.
+- Verified end-to-end in preview: launch from sphere → loader → play → CPU responds → lose (+stash)
+  → retry → win (+capture, win-line) → NEXT LEVEL loader → L2 ghost-serves → sector switch 5×5/7×7
+  (25/49 cells, legends) → skin switch persists → EXIT returns to sphere. Desktop 1280 / mobile 375 layouts clean.
+- tsc clean, production build OK.
+
+**Addendum (same session):** READY cartridges in the sphere now stand out — pulsing gold additive
+halo patch behind the tile frame + soft bounce toward the camera (lerp-driven, desynced phases,
+skips reduced-motion; hover pop integrated into the same lerp so gsap and the loop never fight).
+Sandy approved Pac-Toe ("está increíble").
+
+**Next step:** Stranger Pac-Man (next game), and Brutal Critic pass on pactoe module.
+
+---
+
+## 2026-06-12 — Claude Fable 5 (Clodi) — LEGEND OF THE MUSHROOM KINGDOM SHIPPED
+
+**Phase:** Games — Zelda-in-Mario-world — COMPLETE (Solo Creator mode)
+**Completed:**
+- New `src/games/zelda/` module (lazy chunk, 9.8 kB gzip), 100% procedural pixel art (zero assets):
+  - `art.ts` — bitmap sprites (hero 3 facings, goomba, turtle, piranha, Shell Dragon boss,
+    heart) + tile painters (floor speckle, mario bricks, animated water/lava, glowing ?-blocks,
+    spikes, warp pipe w/ lock, key chest, per-theme decor) + 6 THEMES with palette/tint/weather/decor.
+  - `levels.ts` — 6 maps (30×18) built from inner rows via `buildMap` normalizer (no jagged maps).
+    Worlds: Verdant Plains / Sandstone Bazaar / Sunset Ruins / Stormy Fortress / Crystal Temple /
+    Bowser's Keep (boss arena). Sandy's reference screenshots (BOTW, Bowser's Fury, Odyssey) drove the themes.
+  - `ZeldaGame.tsx` — canvas 2D engine (640×416 internal, lerped camera, pixelated upscale):
+    WASD/arrows + Space/J slash; virtual joystick + attack button on touch; tile AABB collision;
+    enemies (goomba chase, turtle patrol, piranha ambush cycle, boss chase + 3-way fireballs, key drop);
+    ?-block looting (coin/heart), key chest → locked warp pipe → next world via CartridgeLoader;
+    weather per world (petals/sand/leaves/rain+lightning/snow/embers), particles, screen shake,
+    mood tint + vignette, intro/lock toasts; hearts/coins/key HUD, level-select pips (progress-gated);
+    save in localStorage `zelda-v1` (coins total + unlocked); victory screen after world 6.
+- registry: 'zelda-mario' wired; data.ts ready:true (sphere now shows it READY with gold halo).
+- Verified in preview: launch from sphere → World 1 renders (weather, glow, HUD); movement,
+  enemy contact damage → death → RETRY (hearts reset, coins persist); coin pickup; zero console errors.
+  tsc clean, production build OK.
+
+**Next step:** Sandy playtests all 6 worlds; tune difficulty if needed. Then Stranger Pac-Man.
+Backlog: Brutal Critic pass on pactoe + zelda modules; TV videos; responsiveness audit.
+**Issues:** None known.
+**Files changed:** games/zelda/{art.ts,levels.ts,ZeldaGame.tsx} (new), games/registry.ts, sound.ts (slash/hurt/key/pipe), data.ts, styles.css, relay-log.md, .agents/project-hub.md
+
+**PAUSED WIP (resume tomorrow — Sandy's directive 2026-06-12):** Zelda 3D upgrade.
+Sandy wants the Zelda game elevated to a 3D environment (GSAP + Three.js + shaders, Unreal/Unicorn-feel,
+modern with '80s touches). `src/games/zelda/art3d.ts` is CREATED but NOT WIRED (nothing imports it —
+tree-shaken from build; the shipped 2D game is untouched and live). art3d.ts contains: ENVS (6 per-world
+lighting/sky/fog/weather configs), gradient sky dome (ShaderMaterial), GLSL water/lava material,
+procedural brick/?-block textures, buildVoxelSprite (extrudes art.ts pixel bitmaps into merged voxel
+panels), prop builders (coin/key/heart/pipe/chest-with-lid/decor incl. torch flame + crystals).
+NEXT: rewrite ZeldaGame.tsx as 3D — instanced floor/wall boxes from levels.ts maps, chase camera
+(Mario 3D World angle, GSAP fly-in intro), same game logic in tile units (1 tile = 1 unit),
+voxel-sprite characters (3 facings, visibility toggle, scale.x=-1 mirror), shadows (PCFSoft, ortho sun),
+weather as THREE.Points, GSAP juice (chest lid, block punch, slash arc torus, boss death, lightning).
+Keep: HUD/banners/touch controls/CartridgeLoader/save — all unchanged React.
+**Issues:** None. (Stale vite HMR errors in dev console from deleting old PacToe.tsx mid-session — gone on dev server restart.)
+**Files changed:** games/pactoe/{ai.ts,sprites.tsx,PacToeGame.tsx} (new), games/registry.ts, components/PacToe.tsx (deleted), sound.ts, data.ts, styles.css, relay-log.md, .agents/project-hub.md
+
+---
+
 ## HOW TO RESUME (for the next model)
 
 1. Read `/Code-ai/conductor.md` — your PM identity and process

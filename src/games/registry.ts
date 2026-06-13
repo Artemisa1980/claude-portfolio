@@ -8,5 +8,6 @@ export interface GameProps {
 /** Maps game ids from data.ts to lazy-loaded game components.
  *  A cabinet may only have ready:true if its id has an entry here. */
 export const GAME_REGISTRY: Record<string, LazyExoticComponent<ComponentType<GameProps>>> = {
-  'pac-toe': lazy(() => import('../components/PacToe')),
+  'pac-toe': lazy(() => import('./pactoe/PacToeGame')),
+  'zelda-mario': lazy(() => import('./zelda/ZeldaGame')),
 };
