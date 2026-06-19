@@ -1373,6 +1373,11 @@ a {
 .research-row:hover {
   transform: translateX(8px);
 }
+.research-row:focus-visible {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.35);
+}
 .research-row--soon {
   cursor: default;
   opacity: 0.55;

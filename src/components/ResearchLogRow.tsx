@@ -1,3 +1,4 @@
+import type { KeyboardEvent } from 'react';
 import type { ResearchLog } from '../data/researchLogs';
 import { sfx } from '../sound';
 
@@ -9,14 +10,33 @@ interface ResearchLogRowProps {
 export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
   const isLive = log.status === 'live';
 
+  const activate = () => {
+    sfx.hover();
+    onSelect(log.id);
+  };
+
   return (
     <div
       className={`research-row${isLive ? '' : ' research-row--soon'}`}
       onClick={() => {
         if (!isLive) return;
-        sfx.hover();
-        onSelect(log.id);
+        activate();
       }}
+      {...(isLive
+        ? {
+            role: 'button' as const,
+            tabIndex: 0,
+            'aria-label': `Open research log: ${log.title}`,
+            onKeyDown: (e: KeyboardEvent<HTMLDivElement>) => {
+              if (e.key === 'Enter') {
+                activate();
+              } else if (e.key === ' ') {
+                e.preventDefault();
+                activate();
+              }
+            },
+          }
+        : {})}
     >
       <div className="research-row__head">
         <span className="research-row__num">{log.number}</span>
