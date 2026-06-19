@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import gsap from 'gsap';
 import type { ResearchLog } from '../data/researchLogs';
+import { sfx } from '../sound';
 
 const fmtUSD = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
 
@@ -98,7 +99,12 @@ export default function FinancialDashboard({ log, onBack }: FinancialDashboardPr
 
   return (
     <div className="card fin-dash">
-      <button type="button" className="fin-dash__back" onClick={onBack}>
+      <button
+        type="button"
+        className="fin-dash__back"
+        onClick={() => { sfx.click(); onBack(); }}
+        onMouseEnter={() => sfx.hover()}
+      >
         ← CALCULATOR
       </button>
       <h3 className="gh__title" style={{ marginBottom: 6 }}>📊 {log.title}</h3>

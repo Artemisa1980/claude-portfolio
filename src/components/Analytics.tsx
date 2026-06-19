@@ -88,8 +88,7 @@ export default function Analytics() {
 
       <p className="analytics__note">
         “Financial modeling matches operational predictability. As I advance in my BBA path at UTEL, I will
-        update this dashboard with real-time hotel audits, Starbucks layout analyses, and interactive cash
-        flow spreadsheets.”
+        keep growing this dashboard with new research logs and the financial models behind each one.”
       </p>
     </section>
   );

@@ -11,7 +11,7 @@ export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
   const isLive = log.status === 'live';
 
   const activate = () => {
-    sfx.hover();
+    sfx.channel();
     onSelect(log.id);
   };
 
@@ -27,6 +27,7 @@ export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
             role: 'button' as const,
             tabIndex: 0,
             'aria-label': `Open research log: ${log.title}`,
+            onMouseEnter: () => sfx.hover(),
             onKeyDown: (e: KeyboardEvent<HTMLDivElement>) => {
               if (e.key === 'Enter') {
                 activate();
@@ -54,7 +55,8 @@ export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
             href={log.links.html}
             target="_blank"
             rel="noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); sfx.click(); }}
+            onMouseEnter={(e) => { e.stopPropagation(); sfx.hover(); }}
           >
             🌐 READ ONLINE
           </a>
@@ -63,7 +65,8 @@ export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
             href={log.links.pdf}
             target="_blank"
             rel="noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); sfx.click(); }}
+            onMouseEnter={(e) => { e.stopPropagation(); sfx.hover(); }}
           >
             📄 PDF
           </a>
@@ -72,7 +75,8 @@ export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
             href={log.links.doi}
             target="_blank"
             rel="noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); sfx.click(); }}
+            onMouseEnter={(e) => { e.stopPropagation(); sfx.hover(); }}
           >
             🎓 CITE
           </a>
@@ -82,7 +86,8 @@ export default function ResearchLogRow({ log, onSelect }: ResearchLogRowProps) {
               href={log.links.video}
               target="_blank"
               rel="noreferrer"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); sfx.click(); }}
+              onMouseEnter={(e) => { e.stopPropagation(); sfx.hover(); }}
             >
               🎬 VIDEO
             </a>
