@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PROFILE } from '../data';
 import { sfx, setMuted, isMuted } from '../sound';
+import SanblueWordmark from './SanblueWordmark';
 
 const NAV = [
   { href: '#arcade', label: './arcade' },
@@ -45,6 +46,7 @@ export default function Header() {
           {PROFILE.handle} <span className="header__ver">{PROFILE.version}</span>
         </span>
         <span className="header__sub">{PROFILE.subtitle}</span>
+        <SanblueWordmark className="header__brand" />
       </div>
       <nav className="header__nav">
         {NAV.map((n) => (

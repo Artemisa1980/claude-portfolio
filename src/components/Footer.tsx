@@ -1,5 +1,6 @@
 import { PROFILE } from '../data';
 import { sfx } from '../sound';
+import SanblueWordmark from './SanblueWordmark';
 
 export default function Footer() {
   return (
@@ -26,6 +27,10 @@ export default function Footer() {
       >
         ▲ BACK TO TOP
       </button>
+      <div className="footer__sig">
+        <SanblueWordmark tagline />
+        <span className="footer__copy">© 2026 Sandy E. Quintero</span>
+      </div>
     </footer>
   );
 }
